@@ -1,0 +1,12 @@
+body {
+  background-color: #f0f0f0;
+  font-family: sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+#map {
+  display: flex;
+  height: 700px;
+  width: 100dvw;
+}
