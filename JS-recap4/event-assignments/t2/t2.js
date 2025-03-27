@@ -771,3 +771,60 @@ const restaurants = [
 ];
 
 // your code here
+
+// Näytä ravintolat (array) aakkosjärjestyksessä, nimet ja osoitteet
+
+restaurants.sort((a, b) => (a.name || '').localeCompare(b.name || ''));
+
+restaurants.forEach(function (rest) {
+  console.log(rest.name);
+});
+
+const taulu = document.querySelector('table');
+
+for (let restaurant of restaurants) {
+  taulu.insertAdjacentHTML(
+    'beforeend',
+    `
+<tr class="ravintolat">
+  <td class="nimi">${restaurant.name}</td>
+  <td class="address">${restaurant.address}</td>
+</tr>
+  `
+  );
+}
+
+// Käytä .highlight, kun klikkaat html elementtiä (classList)
+// kun painaa uutta, poistaa aikaisemmasta highlightin
+
+taulu.addEventListener('click', e => {
+  if (e.target.closest('tr.ravintolat')) {
+    console.log('Clicked');
+    let allRows = taulu.querySelectorAll('tr');
+    allRows.forEach(row => row.classList.remove('highlight'));
+    e.target.closest('tr.ravintolat').classList.add('highlight');
+
+    console.log(e.target.closest('td'));
+
+    const clickedCell = e.target.closest('td');
+
+    const dialog = document.querySelector('dialog');
+    dialog.showModal();
+
+    for (let restaurant of restaurants) {
+      if (
+        clickedCell.textContent.trim() == restaurant.name ||
+        clickedCell.textContent.trim() == restaurant.address
+      ) {
+        document.getElementById('otsikko').innerHTML = restaurant.name;
+        document.getElementById('info').innerHTML = `
+        Osoite: ${restaurant.address} <br>
+        Postinumero: ${restaurant.postalCode} <br>
+        Kaupunki: ${restaurant.city} <br>
+        Puh: ${restaurant.phone} <br>
+        Yritys: ${restaurant.company}
+        `;
+      }
+    }
+  }
+});

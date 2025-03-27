@@ -29,17 +29,27 @@ const todoList = [
 
 // add your code here
 
-const position = document.getElementById("position");
+const position = document.getElementById('position');
 
 // Ei ehkä paras tapa tehdä näin, mutta toimii
 
 for (let item of todoList) {
   if (item.completed) {
     i = 'checked';
-  } else {i = 'unchecked'}
-  position.insertAdjacentHTML("beforeend",
-    "<li><input type='checkbox' id='todo-" + item.id + "' " + i + ">"
-    + "<label for='todo-" + item.id + "'>" + item.task + "</label></li>"
-  )
+  } else {
+    i = 'unchecked';
+  }
+  position.insertAdjacentHTML(
+    'beforeend',
+    "<li><input type='checkbox' id='todo-" +
+      item.id +
+      "' " +
+      i +
+      '>' +
+      "<label for='todo-" +
+      item.id +
+      "'>" +
+      item.task +
+      '</label></li>'
+  );
 }
-
